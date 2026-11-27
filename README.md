@@ -1,5 +1,2 @@
-
-# Renfe Dossier V1
-MVP con GitHub Actions + Gemini.
-Incluye estructura para RSS, clasificación semáforo, HTML ejecutivo y PDF.
-Configurar secrets: GEMINI_API_KEY, SMTP_*.
+# Renfe Dossier V1.0
+Proyecto completo base con dashboard, histórico y tipos de informe.
