@@ -1,7 +1,26 @@
 {
-  "schedule_time": "07:05",
-  "report_types": [
-    "PROGRAMADO",
-    "MANUAL"
-  ]
+  "scheduled_time": "07:05",
+  "admin_email": "",
+  "gemini_api_key": "",
+  "enabled_sources": [],
+  "keywords": [
+    "Renfe",
+    "AVE",
+    "Cercanías",
+    "Cercanias",
+    "Mercancías",
+    "Mercancias",
+    "Adif",
+    "Alta Velocidad",
+    "Rodalies",
+    "Ouigo",
+    "Iryo",
+    "Ferrocarril",
+    "Transporte ferroviario",
+    "Movilidad"
+  ],
+  "max_news_per_report": 40,
+  "pages_url": "",
+  "email_subject": "[DOSSIER PRESIDENCIA RENFE]",
+  "email_enabled": true
 }

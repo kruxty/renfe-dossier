@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dossier Ejecutivo de Medios · Presidencia RENFE · {{ meta.created }}</title>
+<style>
+  :root{
+    --navy:#1b2a4a; --navy-soft:#24406e; --ink:#2b2f36; --muted:#6b7280;
+    --line:#d8dde6; --bg:#ffffff; --bg-soft:#f4f6f9;
+    --rojo:#8f2d2d; --rojo-bg:#f7ecec;
+    --amarillo:#8a6d1f; --amarillo-bg:#f8f3e4;
+    --verde:#2f6b3f; --verde-bg:#edf5ef;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:Georgia,'Times New Roman',serif; color:var(--ink); background:var(--bg);
+       font-size:15px; line-height:1.55;}
+  .page{max-width:920px; margin:0 auto; padding:48px 40px 64px;}
+
+  /* ---------- Portada ---------- */
+  .portada{border-bottom:3px solid var(--navy); padding-bottom:28px; margin-bottom:28px;}
+  .marca{font-size:30px; letter-spacing:8px; font-weight:bold; color:var(--navy);}
+  .marca-sub{font-family:'Segoe UI',Arial,sans-serif; font-size:11px; letter-spacing:4px;
+             color:var(--muted); text-transform:uppercase; margin-top:6px;}
+  .titulo-doc{margin-top:34px;}
+  .titulo-doc h1{font-size:26px; color:var(--navy); font-weight:normal; letter-spacing:1px;}
+  .titulo-doc h2{font-family:'Segoe UI',Arial,sans-serif; font-size:13px; color:var(--muted);
+                 font-weight:normal; letter-spacing:3px; text-transform:uppercase; margin-top:8px;}
+  .meta-line{font-family:'Segoe UI',Arial,sans-serif; font-size:12.5px; color:var(--muted); margin-top:16px;}
+  .meta-line strong{color:var(--ink);}
+  .badge-tipo{display:inline-block; font-family:'Segoe UI',Arial,sans-serif; font-size:10.5px;
+              letter-spacing:2px; padding:3px 10px; border:1px solid var(--navy);
+              color:var(--navy); text-transform:uppercase; margin-left:8px;}
+  .disclaimer{margin-top:30px; background:var(--bg-soft); border-left:3px solid var(--navy);
+              padding:16px 20px; font-size:12.5px; color:var(--muted); font-style:italic;}
+  .disclaimer p{margin-bottom:6px;}
+
+  /* ---------- Resumen ejecutivo ---------- */
+  .seccion{margin-top:42px;}
+  .seccion > h3{font-family:'Segoe UI',Arial,sans-serif; font-size:13px; letter-spacing:3px;
+                text-transform:uppercase; color:var(--navy); border-bottom:1px solid var(--line);
+                padding-bottom:8px; margin-bottom:18px;}
+  .resumen-grid{display:flex; gap:14px; flex-wrap:wrap;}
+  .kpi{flex:1; min-width:150px; border:1px solid var(--line); padding:16px 18px; background:#fff;}
+  .kpi .num{font-size:30px; font-family:'Segoe UI',Arial,sans-serif; font-weight:600;}
+  .kpi .lbl{font-family:'Segoe UI',Arial,sans-serif; font-size:11px; letter-spacing:2px;
+            text-transform:uppercase; color:var(--muted); margin-top:4px;}
+  .kpi.rojo .num{color:var(--rojo);} .kpi.amarillo .num{color:var(--amarillo);}
+  .kpi.verde .num{color:var(--verde);} .kpi.total .num{color:var(--navy);}
+
+  /* ---------- Índice ---------- */
+  table.indice{width:100%; border-collapse:collapse; font-family:'Segoe UI',Arial,sans-serif; font-size:12.5px;}
+  table.indice th{text-align:left; font-size:10.5px; letter-spacing:2px; text-transform:uppercase;
+                  color:var(--muted); border-bottom:2px solid var(--navy); padding:8px 10px;}
+  table.indice td{border-bottom:1px solid var(--line); padding:8px 10px; vertical-align:top;}
+  table.indice a{color:var(--navy-soft); text-decoration:none;}
+  table.indice a:hover{text-decoration:underline;}
+  .dot{display:inline-block; width:10px; height:10px; border-radius:50%;}
+  .dot.ROJO{background:var(--rojo);} .dot.AMARILLO{background:var(--amarillo);} .dot.VERDE{background:var(--verde);}
+
+  /* ---------- Fichas ---------- */
+  .ficha{border:1px solid var(--line); margin-bottom:22px; page-break-inside:avoid;}
+  .ficha-head{padding:14px 20px; border-bottom:1px solid var(--line);}
+  .ficha-head.ROJO{background:var(--rojo-bg); border-left:4px solid var(--rojo);}
+  .ficha-head.AMARILLO{background:var(--amarillo-bg); border-left:4px solid var(--amarillo);}
+  .ficha-head.VERDE{background:var(--verde-bg); border-left:4px solid var(--verde);}
+  .ficha-head h4{font-size:16.5px; color:var(--ink); font-weight:bold;}
+  .ficha-meta{font-family:'Segoe UI',Arial,sans-serif; font-size:11.5px; color:var(--muted); margin-top:6px;}
+  .ficha-meta .prio{color:var(--navy); font-weight:600;}
+  .ficha-body{padding:16px 20px;}
+  .ficha-body h5{font-family:'Segoe UI',Arial,sans-serif; font-size:10.5px; letter-spacing:2px;
+                 text-transform:uppercase; color:var(--muted); margin:12px 0 4px;}
+  .ficha-body h5:first-child{margin-top:0;}
+  .ficha-body p{font-size:14px;}
+  .impactos{display:flex; gap:14px; flex-wrap:wrap; margin-top:12px;}
+  .impacto{flex:1; min-width:200px; background:var(--bg-soft); padding:10px 14px; font-size:13px;}
+  .impacto b{display:block; font-family:'Segoe UI',Arial,sans-serif; font-size:10px;
+             letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:4px;}
+  .enlace{margin-top:14px; font-family:'Segoe UI',Arial,sans-serif; font-size:12px;}
+  .enlace a{color:var(--navy-soft); word-break:break-all;}
+
+  /* ---------- Anexo ---------- */
+  .anexo-lista{columns:3; column-gap:28px; font-family:'Segoe UI',Arial,sans-serif; font-size:12px;}
+  .anexo-lista div{break-inside:avoid; padding:3px 0; border-bottom:1px dotted var(--line);}
+  .anexo-cat{color:var(--muted); font-size:10px; letter-spacing:1px; text-transform:uppercase;}
+
+  footer{margin-top:56px; padding-top:16px; border-top:1px solid var(--line);
+         font-family:'Segoe UI',Arial,sans-serif; font-size:11px; color:var(--muted);
+         display:flex; justify-content:space-between;}
+
+  @media print{
+    .page{padding:0; max-width:none;}
+    .ficha{page-break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ===================== PORTADA ===================== -->
+  <header class="portada">
+    <div class="marca">RENFE</div>
+    <div class="marca-sub">Presidencia</div>
+    <div class="titulo-doc">
+      <h1>Dossier Ejecutivo de Medios<span class="badge-tipo">{{ meta.tipo }}</span></h1>
+      <h2>Presidencia · Gabinete de Comunicación</h2>
+    </div>
+    <div class="meta-line">
+      Fecha: <strong>{{ meta.created.split(' ')[0] }}</strong> &nbsp;·&nbsp;
+      Hora: <strong>{{ meta.created.split(' ')[1] }}</strong> &nbsp;·&nbsp;
+      Periodo analizado: <strong>{{ meta.date_from }}</strong> — <strong>{{ meta.date_to }}</strong>
+    </div>
+    <div class="disclaimer">
+      <p>Este informe ha sido generado automáticamente mediante sistemas de Inteligencia Artificial
+      a partir de fuentes públicas disponibles en Internet.</p>
+      <p>La clasificación, priorización y resúmenes tienen carácter asistencial y no sustituyen
+      la revisión de las fuentes originales.</p>
+      <p>Documento de uso interno.</p>
+    </div>
+  </header>
+
+  <!-- ===================== RESUMEN EJECUTIVO ===================== -->
+  <section class="seccion">
+    <h3>Resumen Ejecutivo</h3>
+    <div class="resumen-grid">
+      <div class="kpi rojo"><div class="num">{{ counts.ROJO }}</div><div class="lbl">Críticas</div></div>
+      <div class="kpi amarillo"><div class="num">{{ counts.AMARILLO }}</div><div class="lbl">Relevantes</div></div>
+      <div class="kpi verde"><div class="num">{{ counts.VERDE }}</div><div class="lbl">Positivas</div></div>
+      <div class="kpi total"><div class="num">{{ counts.TOTAL }}</div><div class="lbl">Total noticias</div></div>
+    </div>
+  </section>
+
+  <!-- ===================== ÍNDICE ===================== -->
+  <section class="seccion">
+    <h3>Índice</h3>
+    <table class="indice">
+      <thead>
+        <tr><th style="width:36px;">Color</th><th>Titular</th><th style="width:170px;">Medio</th></tr>
+      </thead>
+      <tbody>
+        {% for it in items %}
+        <tr>
+          <td><span class="dot {{ it.color }}" title="{{ it.color }}"></span></td>
+          <td><a href="#noticia-{{ it.idx }}">{{ it.titulo }}</a></td>
+          <td>{{ it.medio }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="3">No se han detectado noticias en el periodo analizado.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ===================== FICHAS ===================== -->
+  <section class="seccion">
+    <h3>Análisis de Noticias</h3>
+    {% for it in items %}
+    <article class="ficha" id="noticia-{{ it.idx }}">
+      <div class="ficha-head {{ it.color }}">
+        <h4><span class="dot {{ it.color }}"></span> {{ it.idx }}. {{ it.titulo }}</h4>
+        <div class="ficha-meta">
+          {{ it.medio }} · {{ it.fecha or meta.created }} ·
+          Prioridad <span class="prio">{{ it.prioridad }}/100</span>
+        </div>
+      </div>
+      <div class="ficha-body">
+        <h5>Resumen Ejecutivo</h5>
+        <p>{{ it.resumen_ejecutivo }}</p>
+        <div class="impactos">
+          <div class="impacto"><b>Impacto Reputacional</b>{{ it.impacto_reputacional }}</div>
+          <div class="impacto"><b>Impacto Operativo</b>{{ it.impacto_operativo }}</div>
+          <div class="impacto"><b>Impacto Político</b>{{ it.impacto_politico }}</div>
+        </div>
+        <div class="enlace">Fuente original: <a href="{{ it.url }}">{{ it.url }}</a></div>
+      </div>
+    </article>
+    {% endfor %}
+  </section>
+
+  <!-- ===================== ANEXO I ===================== -->
+  <section class="seccion">
+    <h3>Anexo I · Fuentes Monitorizadas ({{ total_sources }})</h3>
+    <div class="anexo-lista">
+      {% for s in sources %}
+      <div>{{ s.nombre }} <span class="anexo-cat">· {{ s.categoria }}</span></div>
+      {% endfor %}
+    </div>
+    <p style="margin-top:14px; font-family:'Segoe UI',Arial,sans-serif; font-size:12px; color:var(--muted);">
+      Total fuentes monitorizadas: {{ total_sources }} (incluye búsquedas automatizadas por palabra clave).
+    </p>
+  </section>
+
+  <footer>
+    <span>Generado automáticamente mediante IA.</span>
+    <span>Uso interno Presidencia RENFE.</span>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel Administrativo · Dossier Presidencia RENFE</title>
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-name">RENFE</span>
+    <span class="brand-sub">Dossier Presidencia · Panel Administrativo</span>
+  </div>
+  <nav class="tabs">
+    <button class="tab active" data-tab="panel">Panel</button>
+    <button class="tab" data-tab="historico">Histórico</button>
+    <button class="tab" data-tab="buscador">Buscador</button>
+    <button class="tab" data-tab="config">Configuración</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ==================== PANEL ==================== -->
+  <section id="tab-panel" class="tab-content active">
+    <div class="actions-row">
+      <a id="btn-generar" class="btn-primary" href="#" target="_blank" rel="noopener">
+        ▶ Generar informe ahora
+      </a>
+      <a id="btn-ultimo" class="btn-secondary" href="latest/index.html" target="_blank" rel="noopener">
+        Ver último dossier
+      </a>
+      <span class="hint" id="hint-generar"></span>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-label">Hora programada actual</div>
+        <div class="card-value" id="kpi-hora">—</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Última ejecución</div>
+        <div class="card-value" id="kpi-ultima">—</div>
+        <div class="card-detail" id="kpi-ultima-detalle"></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Próxima ejecución</div>
+        <div class="card-value" id="kpi-proxima">—</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Número total de informes</div>
+        <div class="card-value" id="kpi-total">—</div>
+      </div>
+    </div>
+
+    <div class="cards resumen">
+      <div class="card mini rojo"><div class="card-label">🔴 Críticas (último)</div><div class="card-value" id="kpi-rojo">—</div></div>
+      <div class="card mini amarillo"><div class="card-label">🟡 Relevantes (último)</div><div class="card-value" id="kpi-amarillo">—</div></div>
+      <div class="card mini verde"><div class="card-label">🟢 Positivas (último)</div><div class="card-value" id="kpi-verde">—</div></div>
+    </div>
+
+    <h2 class="section-title">Últimos informes</h2>
+    <table class="table" id="tabla-recientes">
+      <thead>
+        <tr><th>Tipo</th><th>Creado</th><th>Periodo</th><th>🔴</th><th>🟡</th><th>🟢</th><th>Total</th><th></th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <!-- ==================== HISTÓRICO ==================== -->
+  <section id="tab-historico" class="tab-content">
+    <div class="filters">
+      <input type="date" id="hist-fecha" title="Filtrar por fecha">
+      <select id="hist-tipo">
+        <option value="">Todos los tipos</option>
+        <option value="PROGRAMADO">Programado</option>
+        <option value="MANUAL">Manual</option>
+      </select>
+      <button class="btn-secondary" id="hist-limpiar">Limpiar</button>
+    </div>
+    <table class="table" id="tabla-historico">
+      <thead>
+        <tr><th>Tipo</th><th>Creado</th><th>Periodo</th><th>🔴</th><th>🟡</th><th>🟢</th><th>Total</th><th>HTML</th><th>PDF</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <!-- ==================== BUSCADOR ==================== -->
+  <section id="tab-buscador" class="tab-content">
+    <div class="filters">
+      <input type="text" id="buscar-texto" placeholder="Buscar por titular, medio o texto…">
+      <input type="date" id="buscar-fecha" title="Filtrar por fecha">
+      <select id="buscar-color">
+        <option value="">Todos los colores</option>
+        <option value="ROJO">🔴 Rojo</option>
+        <option value="AMARILLO">🟡 Amarillo</option>
+        <option value="VERDE">🟢 Verde</option>
+      </select>
+      <button class="btn-secondary" id="buscar-limpiar">Limpiar</button>
+    </div>
+    <div class="result-count" id="buscar-count"></div>
+    <div id="resultados"></div>
+  </section>
+
+  <!-- ==================== CONFIGURACIÓN ==================== -->
+  <section id="tab-config" class="tab-content">
+    <h2 class="section-title">Configuración del sistema</h2>
+    <table class="table config" id="tabla-config"><tbody></tbody></table>
+    <div class="config-note">
+      <p><strong>Solo el administrador puede cambiar la hora programada.</strong>
+      Para modificarla, edite el fichero <code>config/settings.json</code> del repositorio
+      (campo <code>scheduled_time</code>, formato <code>HH:MM</code>, hora de Madrid).</p>
+      <p><a id="link-settings" href="#" target="_blank" rel="noopener">✎ Editar settings.json en GitHub</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <span>Generado automáticamente mediante IA · Uso interno Presidencia RENFE</span>
+  <span id="footer-updated"></span>
+</footer>
+
+<script src="js/dashboard.js"></script>
+</body>
+</html>
